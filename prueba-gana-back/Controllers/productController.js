@@ -1,17 +1,15 @@
 const Product = require('../Models/productModel');
 
 
+class ProductController {
+ 
+    //POST Create a new product
 
-class Product {
+    async addProduct(product){
+        
+        return Product.create(product);
 
-    constructor() {}
-
-     //POST Create a new product
-
-     async addProduct(newProduct) {
-        return Product.create(newProduct);
-    };
-
+    }
 
     //GET product by name
 
@@ -24,8 +22,7 @@ class Product {
     async findById(id) {
         return Product.findById(id);
     };
-
-   
+ 
 
     //PUT Update product
 
@@ -45,5 +42,5 @@ class Product {
 }
 
 
-let productController = new Product();
+const productController = new ProductController;
 module.exports = productController;

@@ -1,13 +1,10 @@
 const User = require('../Models/userModel');
-const userJWT = require('../Middleware/JWTuser');
 const bcrypt = require('bcryptjs');
-
 
 
 
 class Customer {
 
-    constructor() {}
 
      //POST Create user and hashing password
 
@@ -33,7 +30,7 @@ class Customer {
         if(!await bcrypt.compare(password, user.password)) {
             throw new Error('Wrong password')
         };
-        return {userJWT, user}      
+        return {user};      
 
     };
 

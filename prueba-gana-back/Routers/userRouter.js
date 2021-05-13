@@ -1,9 +1,34 @@
 const routerUser = require("express").Router();
 const userController = require("../Controllers/userController");
-const userSchema = require("../Models/userModel");
+const movieSchema = require("../Models/userModel");
 
 //API use
-routerUser.get("/users", async(req, res) => {
+
+
+routerUser.post("/login", async(req, res) => {
+    try  {
+        const id = await userController.addUser(req.body)
+        res.json(id);
+    } catch (err) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+
+routerUser.post("/", async(req, res) => {
+    try  {
+        const id = await userController.addUser(req.body)
+        res.json(id);
+    } catch (err) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+routerUser.get("/", async(req, res) => {
     try  {
         res.json(await userController.findAllUsers())
     } catch (err) {
@@ -13,7 +38,7 @@ routerUser.get("/users", async(req, res) => {
     }
 });
 
-routerUser.get("/user/:id", async(req, res) => {
+routerUser.get("/:id", async(req, res) => {
     try  {
         const id = req.params.id;
         res.json(await userController.findById(id))
@@ -24,16 +49,6 @@ routerUser.get("/user/:id", async(req, res) => {
     }
 });
 
-routerUser.post("/user", async(req, res) => {
-    try  {
-        const id = await userController.addUser(req.body)
-        res.json(id);
-    } catch (err) {
-        return res.status(500).json({
-            message: err.message
-        });
-    }
-});
 
 routerUser.put('/user/:id', async(req, res) => {
     try {

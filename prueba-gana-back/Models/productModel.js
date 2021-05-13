@@ -8,5 +8,5 @@ const productSchema = new Schema({
     overview: String
 })
 
-productSchema.set('toJSON', toJSONConfig);
+// productSchema.set('toJSON', toJSONConfig);
 module.exports = mongoose.model('Product', productSchema);

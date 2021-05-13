@@ -3,6 +3,19 @@ const productController = require('../Controllers/productController');
 const productSchema = require('../Models/productModel');
 
 //API use
+
+routerProduct.post("/add", async(req, res) => {
+    try  {
+        const id = await productController.addProduct(req.body)
+        res.json(id);
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+
 routerProduct.get("/products", async(req, res) => {
     try  {
         res.json(await productController.findAllProducts())
@@ -24,16 +37,6 @@ routerProduct.get("/product/:id", async(req, res) => {
     }
 });
 
-routerProduct.post("/product", async(req, res) => {
-    try  {
-        const id = await userController.addProduct(req.body)
-        res.json(id);
-    } catch (err) {
-        return res.status(500).json({
-            message: error.message
-        });
-    }
-});
 
 routerProduct.put('/product/:id', async(req, res) => {
     try {

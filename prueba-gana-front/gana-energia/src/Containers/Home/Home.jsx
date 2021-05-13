@@ -5,6 +5,9 @@ const Home = () => {
     return ( 
         <div className='homeContainer'>
             <div className='product'></div>
+            <div className='product'></div>
+            <div className='product'></div>
+            <div className='product'></div>
             
         </div>
     )

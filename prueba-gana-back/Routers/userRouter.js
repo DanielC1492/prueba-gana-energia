@@ -30,7 +30,7 @@ routerUser.post("/user", async(req, res) => {
         res.json(id);
     } catch (err) {
         return res.status(500).json({
-            message: error.message
+            message: err.message
         });
     }
 });

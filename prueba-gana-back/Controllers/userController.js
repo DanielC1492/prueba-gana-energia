@@ -11,11 +11,16 @@ class Customer {
 
      //POST Create user and hashing password
 
-     async addUser(newUser) {
+     async addUser(user) {
+        const userExist = await User.findOne({user});
+        if(userExist) {
+            return ''
+        }
+        user.password = await bcrypt.hash(user.password,5)
 
-        user.password = await bcrypt.hash(user.password, 8);
-        return User.create(newUser);
+        return User.create(user)
     };
+
 
     //POST Login with some error handling
 

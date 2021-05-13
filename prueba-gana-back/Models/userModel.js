@@ -10,21 +10,12 @@ const userSchema = {
         type: String
     },   
     
-    DNI: {
-        type: String
-    },
     email: {
         type: String
     },
     password: {
         type: String,
         required: true
-    },
-    phoneNumber: {
-        type: String
-    },
-    address: {
-        type: String
     }
 
 };

@@ -16,17 +16,17 @@ routerProduct.post("/add", async(req, res) => {
 });
 
 
-routerProduct.get("/products", async(req, res) => {
+routerProduct.get("/all", async(req, res) => {
     try  {
         res.json(await productController.findAllProducts())
-    } catch (err) {
+    } catch (error) {
         return res.status(500).json({
             message: error.message
         });
     }
 });
 
-routerProduct.get("/product/:id", async(req, res) => {
+routerProduct.get("/:id", async(req, res) => {
     try  {
         const id = req.params.id;
         res.json(await productController.findById(id))
@@ -38,7 +38,7 @@ routerProduct.get("/product/:id", async(req, res) => {
 });
 
 
-routerProduct.put('/product/:id', async(req, res) => {
+routerProduct.put('/:id', async(req, res) => {
     try {
         const id = req.params.id;
         res.json(await productController.updateProduct(id, new productSchema(req.body.id)));
@@ -49,7 +49,7 @@ routerProduct.put('/product/:id', async(req, res) => {
     }
 });
 
-routerProduct.delete('/product/:id', async(req, res) => {
+routerProduct.delete('/:id', async(req, res) => {
     try {
         const id = req.params.id;
         const status = 'deleted'

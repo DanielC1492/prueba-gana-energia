@@ -24,7 +24,7 @@ const CreateProduct = () => {
         
 
         return setTimeout(() => {
-            history.pushState('/');
+            history.push('/');
         })
     }
 
@@ -34,15 +34,15 @@ const CreateProduct = () => {
             <div className='addProductForm'>
                 <div className='productName'>
                     Product name
-                    <input></input>
+                    <input placeholder='product name' type='string'  maxLength='50' name="productName" onChange={stateHandler} ></input>
                 </div>
                 <div className='price'>
                     Price
-                    <input></input>
+                    <input placeholder='price' type='string'  maxLength='50' name="price" onChange={stateHandler}></input>
                 </div>
                 <div className='overview'>
                     Overview
-                    <input></input>
+                    <input placeholder='overview' type='string'  maxLength='50' name="overview" onChange={stateHandler}></input>
                 </div>
                 <button onClick={()=> addProduct()} onChange={stateHandler}>Submit</button>
                 

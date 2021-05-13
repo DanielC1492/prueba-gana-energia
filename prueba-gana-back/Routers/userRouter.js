@@ -17,7 +17,7 @@ routerUser.post("/login", async(req, res) => {
 });
 
 
-routerUser.post("/", async(req, res) => {
+routerUser.post("/add", async(req, res) => {
     try  {
         const id = await userController.addUser(req.body)
         res.json(id);
@@ -61,7 +61,7 @@ routerUser.put('/user/:id', async(req, res) => {
     }
 });
 
-routerUser.delete('/user/:id', async(req, res) => {
+routerUser.delete('/:id', async(req, res) => {
     try {
         const id = req.params.id;
         const status = 'deleted'

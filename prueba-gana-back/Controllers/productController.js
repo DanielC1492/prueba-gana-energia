@@ -13,7 +13,7 @@ class ProductController {
 
     //GET product by name
 
-    async findAllProduct(productArray) {
+    async findAllProducts(productArray) {
         return Product.find(productArray);
     };
 

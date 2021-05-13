@@ -1,11 +1,11 @@
-const routerUser = require("express").Router();
-const userController = require("../Controllers/userController");
-const userSchema = require("../Models/userModel");
+const routerProduct = require('express').Router();
+const productController = require('../Controllers/productController');
+const productSchema = require('../Models/productModel');
 
 //API use
-routerUser.get("/users", async(req, res) => {
+routerProduct.get("/products", async(req, res) => {
     try  {
-        res.json(await userController.findAllUsers())
+        res.json(await productController.findAllProducts())
     } catch (err) {
         return res.status(500).json({
             message: error.message
@@ -13,10 +13,10 @@ routerUser.get("/users", async(req, res) => {
     }
 });
 
-routerUser.get("/user/:id", async(req, res) => {
+routerProduct.get("/product/:id", async(req, res) => {
     try  {
         const id = req.params.id;
-        res.json(await userController.findById(id))
+        res.json(await productController.findById(id))
     } catch (err) {
         return res.status(500).json({
             message: error.message
@@ -24,9 +24,9 @@ routerUser.get("/user/:id", async(req, res) => {
     }
 });
 
-routerUser.post("/user", async(req, res) => {
+routerProduct.post("/product", async(req, res) => {
     try  {
-        const id = await userController.addUser(req.body)
+        const id = await userController.addProduct(req.body)
         res.json(id);
     } catch (err) {
         return res.status(500).json({
@@ -35,10 +35,10 @@ routerUser.post("/user", async(req, res) => {
     }
 });
 
-routerUser.put('/user/:id', async(req, res) => {
+routerProduct.put('/product/:id', async(req, res) => {
     try {
         const id = req.params.id;
-        res.json(await userController.updateUser(id, new userSchema(req.body.id)));
+        res.json(await productController.updateProduct(id, new productSchema(req.body.id)));
     } catch (error) {
         return res.status(500).json({
             message: error.message
@@ -46,11 +46,11 @@ routerUser.put('/user/:id', async(req, res) => {
     }
 });
 
-routerUser.delete('/user/:id', async(req, res) => {
+routerProduct.delete('/product/:id', async(req, res) => {
     try {
         const id = req.params.id;
         const status = 'deleted'
-        await userController.deleteUser(id);
+        await productController.deleteProduct(id);
         res.json({ status, id });
     } catch (error) {
         return res.status(500).json({
@@ -59,4 +59,4 @@ routerUser.delete('/user/:id', async(req, res) => {
     }
 });
 
-module.exports = routerUser;
+module.exports = routerProduct;

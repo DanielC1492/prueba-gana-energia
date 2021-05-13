@@ -1,10 +1,37 @@
 const User = require('../Models/userModel');
+const userJWT = require('../Middleware/JWTuser');
+const bcrypt = require('bcryptjs');
+
 
 
 
 class Customer {
 
     constructor() {}
+
+     //POST Create user and hashing password
+
+     async addUser(newUser) {
+
+        user.password = await bcrypt.hash(user.password, 8);
+        return User.create(newUser);
+    };
+
+    //POST Login with some error handling
+
+    async userLogin(nickname, password){
+
+        const user = await User.findOne({nickname});
+        if(!user) {
+            throw new Error('Unable to find user')
+        }
+        if(!await bcrypt.compare(password, user.password)) {
+            throw new Error('Wrong password')
+        };
+        return {userJWT, user}      
+
+    };
+
 
     //GET users by name
 
@@ -18,12 +45,7 @@ class Customer {
         return User.findById(id);
     };
 
-    //POST Insert a new user
-
-    async addUser(newUser) {
-        return User.create(newUser);
-    };
-
+   
     //PUT Update user
 
     async updateUser(customer) {

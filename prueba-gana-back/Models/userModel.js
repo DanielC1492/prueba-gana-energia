@@ -5,6 +5,11 @@ const userSchema = {
     name: {
         type: String
     },
+
+    nickname: {
+        type: String
+    },   
+    
     DNI: {
         type: String
     },

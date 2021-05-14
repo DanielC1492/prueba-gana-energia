@@ -50,7 +50,7 @@ routerUser.get("/:id", async(req, res) => {
 });
 
 
-routerUser.put('/user/:id', async(req, res) => {
+routerUser.put('/:id', async(req, res) => {
     try {
         const id = req.params.id;
         res.json(await userController.updateUser(id, new userSchema(req.body.id)));

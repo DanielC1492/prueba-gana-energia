@@ -56,9 +56,9 @@ class Customer {
 
     //DELETE user by ID
 
-    async deleteUser({ id: id }) {
-        const idFound = User.findOneAndDelete({ id: id })
-        return idFound.remove()
+    async deleteUser(id) {
+        const idFound = User.findByIdAndRemove(id)
+        return idFound
     };
 
 

@@ -16,8 +16,37 @@ const Home = () => {
         
     });
 
+    const [erase, setErase] = useState({
+        productId:'',
+    });
+    
+    const [remove, setRemove] = useState({
+        userId:''
+    });
+
+    const [edit, setEdit] = useState({
+        productId:'',
+        productName : '',
+        productPrice: '',
+        productOverview : ''
+        
+    });
+    
+
     const stateHandler = (event) => {
         setRegister({...register, [event.target.name]: event.target.type === "number" ? +event.target.value : event.target.value});
+    }
+
+    const handlingState = (event) => {
+        setErase({...erase ,[event.target.name]: event.target.type === "number" ? +event.target.value : event.target.value});
+    }
+
+    const userState = (event) => {
+        setRemove({...remove ,[event.target.name]: event.target.type === "number" ? +event.target.value : event.target.value});
+    }
+
+    const productState = (event) => {
+        setEdit({...edit ,[event.target.name]: event.target.type === "number" ? +event.target.value : event.target.value});
     }
 
     const registerUser = async () => {
@@ -31,13 +60,38 @@ const Home = () => {
 
     }
 
-    const deleteProduct = async () => {
-        const res = await axios.delete(`http://localhost:3006/product/${id}` , delete)
+    const deleteUser = async ({user}) => {
+        const id = user._id;
+        const res = await axios.delete(`http://localhost:3006/user/${id}`, remove)
         console.log(res);
         
 
         return setTimeout(() => {
             history.push('/login');
+        })
+
+    }
+
+    const editProduct = async ({product}) => {
+        const idProduct = product._id;
+        const res = await axios.delete(`http://localhost:3006/product/${idProduct}`, edit)
+        console.log(res);
+        
+
+        return setTimeout(() => {
+            history.push('/');
+        })
+
+    }
+
+    const deleteProduct = async ({product}) => {
+        const productId = product._id;
+        const res = await axios.delete(`http://localhost:3006/product/${productId}`, erase)
+        console.log(res);
+        
+
+        return setTimeout(() => {
+            history.push('/');
         })
 
     }
@@ -55,18 +109,21 @@ const Home = () => {
                     <button onClick={()=> registerUser()}>Submit</button>
                 </div>
                 <div className='deleteUser'>Delete User
-                    <input placeholder='User Id...'></input>
-                    <button>Delete User!!</button>
+                    <input placeholder='User Id...'type={'string'} maxLength='50' name='User Id' onChange={userState}></input>
+                    <button onClick={()=> deleteUser()}>Delete User!!</button>
                 </div>
             </div>
             <div className='bot'>
                 <div className='editProduct'>Edit Product
-                    <input placeholder='Product Id...'></input>
-                    <button>Edit product</button>
+                    <input placeholder='Product Id...' type={'string'} maxLength='50' name='ProductId' onChange={productState}></input>
+                    <input placeholder='Product Name...' type={'string'} maxLength='50' name='ProductName' onChange={productState}></input>
+                    <input placeholder='Product price...' type={'string'} maxLength='50' name='ProductPrice' onChange={productState}></input>
+                    <input placeholder='Product overview...' type={'string'} maxLength='50' name='ProductOverview' onChange={productState}></input>
+                    <button onClick={()=> editProduct()}>Edit product</button>
                 </div>
                 <div className='deleteProduct'>Delete Product
-                <input placeholder='Product Id...' type={'string'} maxLength='50' name="Product Id" onChange={stateHandler}></input>
-                    <button>Delete product</button>
+                <input placeholder='Product Id...' type={'string'} maxLength='50' name="Product Id" onChange={handlingState}></input>
+                    <button onClick={()=> deleteProduct()}>Delete product</button>
                 </div>
             </div>
         </div>
